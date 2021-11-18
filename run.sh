@@ -13,7 +13,7 @@ grabdomain() {
 		n+=("$num")
 	done
 	for page in ${n[@]}; do
-		result=$(lynx -dump -listonly -nonumbers -hiddenlinks=ignore -useragent="$(shuf -n 1 < $PREFIX/bin/useragent.txt)" https://www.bing.com/search\?q\=$1\&first\=$page\&FORM\=PORE | grep -vE "bing.com|micro|creative|javascript:|msn" | awk -F/ '{print $3}' | sort -u)
+		result=$(lynx -dump -listonly -nonumbers -hiddenlinks=ignore -useragent="$(shuf -n 1 < .useragent.txt)" https://www.bing.com/search\?q\=$1\&first\=$page\&FORM\=PORE | grep -vE "bing.com|micro|creative|javascript:|msn" | awk -F/ '{print $3}' | sort -u)
 		if [[ -n $result ]]; then
 			echo "$result" >> .temp
 			printf "\r[*] Keyword: $1 Found $(sort -u .temp | wc -l) domain"
